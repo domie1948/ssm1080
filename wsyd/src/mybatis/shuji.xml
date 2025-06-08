@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!--这个namespace + 下面的id 就是一个完整的路径，在dao层我们写了完整的路径之后mybatis就是映射这个文件中的相关sql语句 -->
+<mapper namespace="com.shuji">
+<!-- parameterType就是你接受的参数的类型，  -->
+<!-- 添加用户信息 -->
+<insert id="insertshuji"  parameterType="java.util.Map">
+ insert  into  shuji(sjmc,fl,zz,cbs,js,tp,wj,lll,sj)  values(#{sjmc},#{fl},#{zz},#{cbs},#{js},#{tp},#{wj},#{lll},#{sj})
+</insert>
+
+<delete id="delshuji" parameterType="int">
+ delete  from  shuji where sjid=#{sjid}
+</delete>
+
+<update id="updateshuji" parameterType="java.util.Map">
+update shuji set sjmc=#{sjmc},fl=#{fl},zz=#{zz},cbs=#{cbs},js=#{js},tp=#{tp},wj=#{wj},lll=#{lll},sj=#{sj} where sjid=#{sjid}
+</update>
+
+<!--  查询返回的是 list<map> -->
+<!-- resultType 就是返回查询结果的类型，而如果是resultMap=则返回的就是你定义的javabean  -->
+<select  id="selectshuji"  parameterType="int" resultType="java.util.Map">
+  select  * from shuji where sjid=#{sjid}
+</select>
+
+<!-- resultType 就是返回查询结果的类型，而如果是resultMap=则返回的就是你定义的javabean  -->
+<select  id="selectall"  parameterType="java.util.Map" resultType="java.util.Map">
+  select  * from shuji where 1=1
+  
+  
+      <if test=" null != zz">
+            and zz = #{zz}
+        </if>
+</select>
+
+</mapper>
